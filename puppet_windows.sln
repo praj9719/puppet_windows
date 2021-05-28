@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "puppet_windows", "puppet_windows\puppet_windows.csproj", "{A40E272B-3B97-4720-BF55-032DC39EC983}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A40E272B-3B97-4720-BF55-032DC39EC983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A40E272B-3B97-4720-BF55-032DC39EC983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A40E272B-3B97-4720-BF55-032DC39EC983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A40E272B-3B97-4720-BF55-032DC39EC983}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18DA9A4B-8BF0-4BA9-BED9-C7AE5F2D04B3}
+	EndGlobalSection
+EndGlobal
