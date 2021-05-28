@@ -7,3 +7,5 @@ D:\Projects\Puppet\Final\puppet_windows\puppet_windows\obj\Debug\puppet_windows.
 D:\Projects\Puppet\Final\puppet_windows\puppet_windows\obj\Debug\puppet_windows.csproj.GenerateResource.cache
 D:\Projects\Puppet\Final\puppet_windows\puppet_windows\obj\Debug\puppet_windows.exe
 D:\Projects\Puppet\Final\puppet_windows\puppet_windows\obj\Debug\puppet_windows.pdb
+D:\Projects\Puppet\Final\puppet_windows\puppet_windows\bin\Debug\QRCoder.dll
+D:\Projects\Puppet\Final\puppet_windows\puppet_windows\obj\Debug\puppet_windows.csproj.CopyComplete
