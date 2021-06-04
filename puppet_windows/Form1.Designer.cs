@@ -36,11 +36,9 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.picture_qr = new System.Windows.Forms.PictureBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textLogs = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
             this.text_name = new System.Windows.Forms.TextBox();
@@ -48,6 +46,8 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.btn_main = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture_qr)).BeginInit();
@@ -119,22 +119,6 @@
             this.picture_qr.TabIndex = 0;
             this.picture_qr.TabStop = false;
             // 
-            // panel8
-            // 
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 240);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(200, 25);
-            this.panel8.TabIndex = 1;
-            // 
-            // panel7
-            // 
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(200, 25);
-            this.panel7.TabIndex = 0;
-            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.panel12);
@@ -149,7 +133,7 @@
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.textBox2);
+            this.panel12.Controls.Add(this.textLogs);
             this.panel12.Controls.Add(this.label2);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(0, 50);
@@ -157,13 +141,14 @@
             this.panel12.Size = new System.Drawing.Size(507, 165);
             this.panel12.TabIndex = 3;
             // 
-            // textBox2
+            // textLogs
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 38);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(495, 106);
-            this.textBox2.TabIndex = 1;
+            this.textLogs.Location = new System.Drawing.Point(6, 38);
+            this.textLogs.Multiline = true;
+            this.textLogs.Name = "textLogs";
+            this.textLogs.ReadOnly = true;
+            this.textLogs.Size = new System.Drawing.Size(495, 106);
+            this.textLogs.TabIndex = 1;
             // 
             // label2
             // 
@@ -235,6 +220,22 @@
             this.panel5.Size = new System.Drawing.Size(25, 265);
             this.panel5.TabIndex = 0;
             // 
+            // panel8
+            // 
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel8.Location = new System.Drawing.Point(0, 240);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(200, 25);
+            this.panel8.TabIndex = 1;
+            // 
+            // panel7
+            // 
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(200, 25);
+            this.panel7.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -272,18 +273,18 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.PictureBox picture_qr;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textLogs;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.TextBox text_name;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Button btn_main;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel7;
     }
 }
 
