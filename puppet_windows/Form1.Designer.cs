@@ -45,6 +45,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textLogs = new System.Windows.Forms.TextBox();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.text_status = new System.Windows.Forms.Label();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture_qr)).BeginInit();
@@ -158,15 +159,16 @@
             // 
             // btn_main
             // 
+            this.btn_main.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btn_main.FlatAppearance.BorderSize = 0;
             this.btn_main.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_main.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_main.Location = new System.Drawing.Point(6, 161);
+            this.btn_main.Location = new System.Drawing.Point(6, 148);
             this.btn_main.Name = "btn_main";
             this.btn_main.Size = new System.Drawing.Size(494, 38);
             this.btn_main.TabIndex = 0;
             this.btn_main.Text = "Listen";
-            this.btn_main.UseVisualStyleBackColor = true;
+            this.btn_main.UseVisualStyleBackColor = false;
             this.btn_main.Click += new System.EventHandler(this.btn_main_Click);
             // 
             // panel5
@@ -180,30 +182,46 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(7, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 17);
+            this.label2.Size = new System.Drawing.Size(72, 21);
             this.label2.TabIndex = 0;
-            this.label2.Text = "logs ";
+            this.label2.Text = "Status -";
             // 
             // textLogs
             // 
-            this.textLogs.Location = new System.Drawing.Point(6, 38);
+            this.textLogs.BackColor = System.Drawing.SystemColors.Control;
+            this.textLogs.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textLogs.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textLogs.Location = new System.Drawing.Point(6, 49);
             this.textLogs.Multiline = true;
             this.textLogs.Name = "textLogs";
             this.textLogs.ReadOnly = true;
-            this.textLogs.Size = new System.Drawing.Size(495, 60);
+            this.textLogs.Size = new System.Drawing.Size(495, 34);
             this.textLogs.TabIndex = 1;
+            this.textLogs.Text = "scan qe";
             // 
             // panel12
             // 
+            this.panel12.Controls.Add(this.text_status);
             this.panel12.Controls.Add(this.textLogs);
             this.panel12.Controls.Add(this.label2);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel12.Location = new System.Drawing.Point(0, 50);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(507, 105);
+            this.panel12.Size = new System.Drawing.Size(507, 92);
             this.panel12.TabIndex = 3;
+            // 
+            // text_status
+            // 
+            this.text_status.AutoSize = true;
+            this.text_status.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.text_status.Location = new System.Drawing.Point(86, 7);
+            this.text_status.Name = "text_status";
+            this.text_status.Size = new System.Drawing.Size(140, 21);
+            this.text_status.TabIndex = 2;
+            this.text_status.Text = "Not connected";
             // 
             // Form1
             // 
@@ -250,6 +268,7 @@
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.TextBox textLogs;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label text_status;
     }
 }
 

@@ -51,7 +51,8 @@ namespace puppet_windows
             backgroundWorker_client_send.WorkerSupportsCancellation = true;
 
             update("Start");
-            update_qr("Prajwal");
+            update_qr("Puppet");
+            display("Click on start to begin");
         }
 
         private void btn_main_Click(object sender, EventArgs e)
@@ -59,8 +60,7 @@ namespace puppet_windows
             if (client_listner == null)
             {
                 backgroundWorker_client_listner.RunWorkerAsync();
-                update("waiting...");
-                btn_main.Enabled = false;
+                update("Cancel");
             }
             else
             {
@@ -104,12 +104,13 @@ namespace puppet_windows
             {
                 client_listner.Bind(localEndPoint);
                 client_listner.Listen(1);
-                display("Waiting for client...");
+                display("Scan QR code on Puppet Andriod");
                 client_socket = client_listner.Accept();
             }
             catch (Exception ex)
             {
                 display("Exception: " + ex.ToString());
+                text_status.Text = "Not connected";
             }
             if (backgroundWorker_client_listner.CancellationPending)
             {
@@ -123,10 +124,16 @@ namespace puppet_windows
         {
             update("Stop");
             btn_main.Enabled = true;
-            if (e.Cancelled) display("Process was canceled");
+            if (e.Cancelled)
+            {
+                display("Connection Cancelled!");
+                update("Start");
+                text_status.Text = "Not connected";
+            }
             else if (e.Error != null) display("Error occured");
             else
             {
+                text_status.Text = "Connected";
                 display("Client Connected!");
                 backgroundWorker_client_recive.RunWorkerAsync();
                 // backgroundWorker_client_send.RunWorkerAsync();
@@ -197,7 +204,11 @@ namespace puppet_windows
 
         private void BackgroundWorker_client_recive_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled || e.Error != null) display("Connection terminated! start again");
+            if (e.Cancelled || e.Error != null)
+            {
+                display("Connection stopped!");
+                text_status.Text = "Not connected";
+            }
             else backgroundWorker_client_recive.RunWorkerAsync();
         }
 
@@ -212,7 +223,11 @@ namespace puppet_windows
 
         private void BackgroundWorker_client_send_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled || e.Error != null) display("Somthing went wrong");
+            if (e.Cancelled || e.Error != null)
+            {
+                display("Somthing went wrong");
+                text_status.Text = "Not Connected";
+            }
             else backgroundWorker_client_send.RunWorkerAsync();
             // throw new NotImplementedException();
         }
@@ -234,12 +249,9 @@ namespace puppet_windows
 
                 if (msgs.Length == 3)
                 {
-                    message = "\r\n" +
-                        "  Status: " + msgs[0] + "\r\n" +
-                        "  Mouse: " + msgs[1] + "\r\n" +
-                        "  Keyboard: " + msgs[2];
+                    message = "need to update it later";
                 }
-                else message = "\r\n  " + message;
+                else message = ">>  " + message;
 
                 textLogs.Text = message;
             }
