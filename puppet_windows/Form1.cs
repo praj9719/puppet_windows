@@ -85,10 +85,7 @@ namespace puppet_windows
             String hostName = Dns.GetHostName();
             IPHostEntry hostEntry = Dns.GetHostEntry(hostName);
 
-            IPAddress[] ips = Dns.GetHostEntry(hostName).AddressList;
-            Console.WriteLine(ips.Length);
             IPAddress ipAddress = Dns.GetHostByName(hostName).AddressList[1];
-
 
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, port);
 
@@ -282,6 +279,13 @@ namespace puppet_windows
 
         private void restart(String text)
         {
+            if (client_listner != null) client_listner.Close();
+            if (client_socket != null) client_socket.Close();
+            client_listner = null;
+            client_socket = null;
+            backgroundWorker_client_listner.CancelAsync();
+            backgroundWorker_client_recive.CancelAsync();
+            backgroundWorker_client_send.CancelAsync();
             display(text);
             update("Start");
             text_status.Text = "Not connected";
