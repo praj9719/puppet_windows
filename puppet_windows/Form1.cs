@@ -85,7 +85,11 @@ namespace puppet_windows
             String hostName = Dns.GetHostName();
             IPHostEntry hostEntry = Dns.GetHostEntry(hostName);
 
+            IPAddress[] ips = Dns.GetHostEntry(hostName).AddressList;
+            Console.WriteLine(ips.Length);
             IPAddress ipAddress = Dns.GetHostByName(hostName).AddressList[1];
+
+
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, port);
 
 
@@ -97,7 +101,6 @@ namespace puppet_windows
             if (string.IsNullOrEmpty(name)) name = "server";
             string txdata = name + "<-->" + ipAddress.ToString() + "<-->" + port;
             update_qr(txdata);
-            display(txdata);
 
             client_listner = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             try
@@ -109,8 +112,7 @@ namespace puppet_windows
             }
             catch (Exception ex)
             {
-                display("Exception: " + ex.ToString());
-                text_status.Text = "Not connected";
+                restart("Exception: " + ex.ToString());
             }
             if (backgroundWorker_client_listner.CancellationPending)
             {
@@ -123,14 +125,8 @@ namespace puppet_windows
         private void backgroundWorker_client_listner_RunWorkerComplete(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             update("Stop");
-            btn_main.Enabled = true;
-            if (e.Cancelled)
-            {
-                display("Connection Cancelled!");
-                update("Start");
-                text_status.Text = "Not connected";
-            }
-            else if (e.Error != null) display("Error occured");
+            if (e.Cancelled) restart("Connection Cancelled!");
+            else if (e.Error != null) restart("Connecction Stopped! Start Again");
             else
             {
                 text_status.Text = "Connected";
@@ -156,7 +152,7 @@ namespace puppet_windows
                     client_socket.Receive(rcvBytes);
                     string recived_cmd = System.Text.Encoding.ASCII.GetString(rcvBytes);
                     display(recived_cmd);
-                    if (string.Equals(recived_cmd, "exit")) e.Cancel = true;
+                    if (string.Equals(recived_cmd, "@ex")) e.Cancel = true;
                     else executeCommands(recived_cmd);
                 }
             }
@@ -166,17 +162,17 @@ namespace puppet_windows
             }
         }
 
-        private void executeCommands(String cmds)
+        private void executeCommands(String cmd)
         {
-
-            String[] crsr = cmds.Split(':');
-            if (crsr.Length == 3)
+            String[] cmds = Regex.Split(cmd, @"<-->");
+            if (cmds.Length == 4)
             {
                 try
                 {
-                    int x = Int32.Parse(crsr[0]);
-                    int y = Int32.Parse(crsr[1]);
-                    int c = Int32.Parse(crsr[2]);
+                    int x = Int32.Parse(cmds[0]);
+                    int y = Int32.Parse(cmds[1]);
+                    int c = Int32.Parse(cmds[2]);
+                    string key = cmds[3];
                     Cursor.Position = new Point(Cursor.Position.X + x, Cursor.Position.Y + y);
                     if (c == 1)
                     {
@@ -192,8 +188,19 @@ namespace puppet_windows
                         Thread.Sleep(50);
                         mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
                     }
-
-
+                    else if (c == 3)
+                    {
+                        uint X = (uint)Cursor.Position.X;
+                        uint Y = (uint)Cursor.Position.Y;
+                        mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
+                    }
+                    if (!String.Equals(key, "xox"))
+                    {
+                        if (key.Length == 1) SendKeys.SendWait(key);
+                        else if (String.Equals(key, "@en")) SendKeys.SendWait("{Enter}");
+                        else if (String.Equals(key, "@sp")) SendKeys.SendWait(" ");
+                        else if (String.Equals(key, "@de")) SendKeys.SendWait("{BACKSPACE}"); 
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -204,11 +211,7 @@ namespace puppet_windows
 
         private void BackgroundWorker_client_recive_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled || e.Error != null)
-            {
-                display("Connection stopped!");
-                text_status.Text = "Not connected";
-            }
+            if (e.Cancelled || e.Error != null) restart("Connection Terminated!");
             else backgroundWorker_client_recive.RunWorkerAsync();
         }
 
@@ -244,15 +247,13 @@ namespace puppet_windows
             }
             else
             {
-                // textLogs.AppendText(message + "\r\n");
                 string[] msgs = Regex.Split(message, @"<-->");
-
-                if (msgs.Length == 3)
+                if (msgs.Length == 4)
                 {
-                    message = "need to update it later";
+                    if (!String.Equals(msgs[3], "xox")) message = msgs[3];
+                    else message = "X: " + msgs[0] + " Y: " + msgs[1] + " C: " + msgs[2];
                 }
                 else message = ">>  " + message;
-
                 textLogs.Text = message;
             }
                 
@@ -277,6 +278,13 @@ namespace puppet_windows
             QRCodeData data = qr.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q);
             QRCode code = new QRCode(data);
             picture_qr.Image = code.GetGraphic(5);
+        }
+
+        private void restart(String text)
+        {
+            display(text);
+            update("Start");
+            text_status.Text = "Not connected";
         }
     }
 }
